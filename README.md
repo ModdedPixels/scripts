@@ -1,1 +1,1 @@
-# Chromebook-UEFI
+# scripts
