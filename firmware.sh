@@ -193,7 +193,7 @@ MrChromebox does not provide any support for running Windows."
 function flash_full_rom()
 {
 	# ensure hardware write protect disabled
-	[[ "$wpEnabled" = true ]] && { exit_red "\nHardware write-protect enabled, cannot flash Full ROM firmware."; return 1; }
+	[[ "$wpEnabled" = true ]] && { exit_red "\nHardware write-protect enabled, cannot flash Full ROM firmware. Check https://docs.mrchromebox.tech/docs/supported-devices.html and look for WP Method."; return 1; }
 
 	echo_green "\nInstall/Update UEFI Full ROM Firmware"
 	echo_yellow "IMPORTANT: flashing the firmware has the potential to brick your device,
@@ -221,16 +221,16 @@ be sure to set the ccd capability 'FlashAP Always' using your
 USB-C debug cable, otherwise recovery will involve disassembling
 your device (which is very difficult in some cases)."
 
-		echo_yellow "If you wish to continue, type: 'I ACCEPT' and press enter."
+		echo_yellow "If you wish to continue, type: 'I agree' and press enter."
 		read -re
-		[[ "$REPLY" = "I ACCEPT" ]] || return
+		[[ "$REPLY" = "I agree" ]] || return
 	fi
 
 	#UEFI notice if flashing from ChromeOS or Legacy
 	if [[ ! -d /sys/firmware/efi ]]; then
 		[[ "$isChromeOS" = true ]] && currOS="ChromeOS" || currOS="Your Legacy-installed OS"
 		echo_yellow "
-NOTE: After flashing UEFI firmware, you will need to install a UEFI-compatible
+IMPORTANT: After flashing UEFI firmware, you will need to install a UEFI-compatible
 OS; ${currOS} will no longer be bootable. See https://mrchromebox.tech/#faq"
 		REPLY=""
 		read -rep "Press Y to continue or any other key to abort. "
@@ -240,7 +240,7 @@ OS; ${currOS} will no longer be bootable. See https://mrchromebox.tech/#faq"
 	# PCO boot device notice
 	if [[ "$isPCO" = true && ! -d /sys/firmware/efi ]]; then
 		echo_yellow "
-NOTE: Booting from eMMC on AMD Picasso-based devices does not currently work --
+IMPORTANT: Booting from eMMC on AMD Picasso-based devices does not currently work --
 only NVMe, SD and USB. If you have a device with eMMC storage you will not be
 able to boot from it after installing the UEFI Full ROM firmware."
 		REPLY=""
