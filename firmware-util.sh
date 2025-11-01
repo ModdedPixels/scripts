@@ -17,7 +17,7 @@
 script_dir="$(dirname "$(readlink -f "$0")")"
 
 #where the stuff is
-script_url="https://raw.githubusercontent.com/ModdedPixels/Chromebook-UEFI/main/"
+script_url="https://raw.githubusercontent.com/ModdedPixels/Chromebook-UEFI/refs/heads/main/"
 
 #ensure output of system tools in en-us for parsing
 export LC_ALL=C
